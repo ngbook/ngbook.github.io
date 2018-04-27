@@ -1,85 +1,134 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>TypeScript规范 —— 2018-04-23</title>
-        <style>
-            body {
-                font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
-                font-size: 16px;
-                line-height: 1.42857143;
-                color: #333;
-                background-color: #fff;
-}
-            ul li {
-                line-height: 24px;
-}
-            blockquote {
-                border-left: #eee solid 5px;
-                padding-left: 20px;
-}
-            pre {
-                overflow: auto;
-                border: 1px solid #ccc;
-                padding: 5px;
-}
-            #mdContent {
-                padding: 10px 50px;
-                width: 90%;
-}
-                /* background: #F9F2F4; */
-        </style>
-        <link rel="stylesheet" href="./xcode.css">
-    </head>
 
-    <body>
-        <div id="mdContent">
-            <h1 id="-">目录</h1>
-            <p><a href="#1-">1声明变量</a></p>
-            <p><a href="#2-">2对象</a></p>
-            <p><a href="#3-">3数组</a></p>
-            <p><a href="#4-">4解构赋值</a></p>
-            <p><a href="#5-">5字符串</a></p>
-            <p><a href="#6-">6函数</a></p>
-            <p><a href="#7-">7箭头函数</a></p>
-            <p><a href="#8-">8类与构造器</a></p>
-            <p><a href="#9-">9模块(module)</a>)</p>
-            <p><a href="#10-">10变量</a></p>
-            <p><a href="#11-">11变量提升</a></p>
-            <p><a href="#12-">12比较操作符</a></p>
-            <p><a href="#13-">13Blocks</a></p>
-            <p><a href="#17-">17流程控制语句</a></p>
-            <p><a href="#18-">18注释</a></p>
-            <p><a href="#19-">19空格</a></p>
-            <p><a href="#20-">20逗号</a></p>
-            <p><a href="#21-">21分号</a></p>
-            <p><a href="#22-">22命名规范</a></p>
-            <p><a href="#23-">23Accessors(即getter,setter)</a>)</p>
-            <p><a href="#24-">24标准库</a></p>
-            <h1 id="-">名词解析:</h1>
-            <ul>
-            <li><p>副作用(side effect): 副作用是函数式编程中的一个重要概念, 指某函数在调用时除了输入和输出外, 可能会对外界产生影响. 无副作用的函数有以下特点：</p>
-            <ul>
-            <li>对同样的输入，函数的输出永远保持不变</li>
-            <li>函数不依赖也不修改全局变量</li>
-            <li><p>函数内部不允许修改输入的参数 </p>
-            <p>无副作用函数的好处是降低bug查找难度, 方便测试, 提高代码可读性, 显而易见的是, 如果一段代码的输出结果不依赖某个状态, 这段代码时非常容易理解的.</p>
+<head>
+    <title>TypeScript规范 —— 2018-04-23</title>
+    <style>
+        body {
+            font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
+            font-size: 16px;
+            line-height: 1.42857143;
+            color: #333;
+            background-color: #fff;
+        }
+
+        ul li {
+            line-height: 24px;
+        }
+
+        blockquote {
+            border-left: #eee solid 5px;
+            padding-left: 20px;
+        }
+
+        pre {
+            overflow: auto;
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+
+        #mdContent {
+            padding: 10px 50px;
+            width: 90%;
+        }
+
+        /* background: #F9F2F4; */
+    </style>
+    <link rel="stylesheet" href="./xcode.css">
+</head>
+
+<body>
+    <div id="mdContent">
+        <h1 id="-">目录</h1>
+        <p>
+            <a href="#1-">1声明变量</a>
+        </p>
+        <p>
+            <a href="#2-">2对象</a>
+        </p>
+        <p>
+            <a href="#3-">3数组</a>
+        </p>
+        <p>
+            <a href="#4-">4解构赋值</a>
+        </p>
+        <p>
+            <a href="#5-">5字符串</a>
+        </p>
+        <p>
+            <a href="#6-">6函数</a>
+        </p>
+        <p>
+            <a href="#7-">7箭头函数</a>
+        </p>
+        <p>
+            <a href="#8-">8类与构造器</a>
+        </p>
+        <p>
+            <a href="#9-">9模块(module)</a>)</p>
+        <p>
+            <a href="#10-">10变量</a>
+        </p>
+        <p>
+            <a href="#11-">11变量提升</a>
+        </p>
+        <p>
+            <a href="#12-">12比较操作符</a>
+        </p>
+        <p>
+            <a href="#13-">13Blocks</a>
+        </p>
+        <p>
+            <a href="#17-">17流程控制语句</a>
+        </p>
+        <p>
+            <a href="#18-">18注释</a>
+        </p>
+        <p>
+            <a href="#19-">19空格</a>
+        </p>
+        <p>
+            <a href="#20-">20逗号</a>
+        </p>
+        <p>
+            <a href="#21-">21分号</a>
+        </p>
+        <p>
+            <a href="#22-">22命名规范</a>
+        </p>
+        <p>
+            <a href="#23-">23Accessors(即getter,setter)</a>)</p>
+        <p>
+            <a href="#24-">24标准库</a>
+        </p>
+        <h1 id="-">名词解析:</h1>
+        <ul>
+            <li>
+                <p>副作用(side effect): 副作用是函数式编程中的一个重要概念, 指某函数在调用时除了输入和输出外, 可能会对外界产生影响. 无副作用的函数有以下特点：</p>
+                <ul>
+                    <li>对同样的输入，函数的输出永远保持不变</li>
+                    <li>函数不依赖也不修改全局变量</li>
+                    <li>
+                        <p>函数内部不允许修改输入的参数 </p>
+                        <p>无副作用函数的好处是降低bug查找难度, 方便测试, 提高代码可读性, 显而易见的是, 如果一段代码的输出结果不依赖某个状态, 这段代码时非常容易理解的.</p>
+                    </li>
+                </ul>
             </li>
-            </ul>
-            </li>
-            </ul>
-            <h1 id="1-">1 声明变量</h1>
-            <h2 id="1-1-const-let-var-">1.1优先使用const而非let, 坚决不使用var.</h2>
-            <p>变量不可变有利于代码理解, 如果修改了某个变量, 应该为之起一个新的合适的变量名, 以表示该变量的最新状态.</p>
-            <h1 id="2-">2对象</h1>
-            <h2 id="2-1-new-object-">2.1不允许使用 new Object(), 因为没用, 而且慢.</h2>
-            <pre><code>
+        </ul>
+        <h1 id="1-">1 声明变量</h1>
+        <h2 id="1-1-const-let-var-">1.1优先使用const而非let, 坚决不使用var.</h2>
+        <p>变量不可变有利于代码理解, 如果修改了某个变量, 应该为之起一个新的合适的变量名, 以表示该变量的最新状态.</p>
+        <h1 id="2-">2对象</h1>
+        <h2 id="2-1-new-object-">2.1不允许使用 new Object(), 因为没用, 而且慢.</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">const</span> item = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Object</span>();
             
 <span class="hljs-comment">// good</span>
 <span class="hljs-keyword">const</span> item = {};
-            </code></pre><h2 id="2-2-es6-">2.2在对象中使用es6的快捷方式定义函数</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="2-2-es6-">2.2在对象中使用es6的快捷方式定义函数</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">const</span> atom = {
   <span class="hljs-keyword">value</span>: <span class="hljs-number">1</span>,
@@ -98,9 +147,10 @@
     <span class="hljs-keyword">return</span> atom.<span class="hljs-keyword">value</span> + <span class="hljs-keyword">value</span>;
   },
 };
-            </code></pre><h2 id="2-3-es6-property-value-shorthand-">2.3使用es6的property value shorthand为对象赋值</h2>
-            <p>通常对象的格式为: {value}, 但是当某个变量名与key名一致时, 可以省略value.</p>
-            <pre><code>
+            </code></pre>
+        <h2 id="2-3-es6-property-value-shorthand-">2.3使用es6的property value shorthand为对象赋值</h2>
+        <p>通常对象的格式为: {value}, 但是当某个变量名与key名一致时, 可以省略value.</p>
+        <pre><code>
 <span class="hljs-keyword">const</span> lukeSkywalker = <span class="hljs-string">'Luke Skywalker'</span>;
             
 <span class="hljs-comment">// 以下两种方式效果一样</span>
@@ -114,8 +164,9 @@
 <span class="hljs-keyword">const</span> obj = {
               lukeSkywalker,
 };
-            </code></pre><h2 id="2-4-es6-property-value-shorthand-">2.4使用es6 property value shorthand 赋值的属性应该放在前面</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="2-4-es6-property-value-shorthand-">2.4使用es6 property value shorthand 赋值的属性应该放在前面</h2>
+        <pre><code>
 <span class="hljs-keyword">const</span> anakinSkywalker = <span class="hljs-string">'Anakin Skywalker'</span>;
 <span class="hljs-keyword">const</span> lukeSkywalker = <span class="hljs-string">'Luke Skywalker'</span>;
             
@@ -138,9 +189,10 @@
     episodeThree: <span class="hljs-number">3</span>,
     mayTheFourth: <span class="hljs-number">4</span>,
 };
-            </code></pre><h2 id="2-5-">2.5不要为对象的属性名添加引号</h2>
-            <p>除非该属性名包含特殊字符</p>
-            <pre><code>
+            </code></pre>
+        <h2 id="2-5-">2.5不要为对象的属性名添加引号</h2>
+        <p>除非该属性名包含特殊字符</p>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">const</span> bad = {
   <span class="hljs-string">'foo'</span>: <span class="hljs-number">3</span>,
@@ -154,12 +206,20 @@
     bar: <span class="hljs-number">4</span>,
     <span class="hljs-string">'data-blah'</span>: <span class="hljs-number">5</span>,
 };
-            </code></pre><h2 id="2-6-object-prototype-">2.6不用直接调用<code>Object.prototype</code>上的函数</h2>
-            <p>比如<code>hasOwnProperty</code>, <code>propertyIsEnumerable</code>, and <code>isPrototypeOf</code>.</p>
-            <p>比如有一个对象obj, <code>obj.hasOwnProperty</code>这种写法会有两个风险: </p>
-            <p>1.如果对象obj是原型为null的对象(<code>Object.create(null)</code>), 但是你需要在该对象上运行<code>hasOwnProperty</code>, 那么便会有运行时错误</p>
-            <p>2.如果对象A原型链上的hasOwnProperty不知道被谁重写了, 那么调用的结果也是不对的.</p>
-            <pre><code>
+            </code></pre>
+        <h2 id="2-6-object-prototype-">2.6不用直接调用
+            <code>Object.prototype</code>上的函数</h2>
+        <p>比如
+            <code>hasOwnProperty</code>,
+            <code>propertyIsEnumerable</code>, and
+            <code>isPrototypeOf</code>.</p>
+        <p>比如有一个对象obj,
+            <code>obj.hasOwnProperty</code>这种写法会有两个风险: </p>
+        <p>1.如果对象obj是原型为null的对象(
+            <code>Object.create(null)</code>), 但是你需要在该对象上运行
+            <code>hasOwnProperty</code>, 那么便会有运行时错误</p>
+        <p>2.如果对象A原型链上的hasOwnProperty不知道被谁重写了, 那么调用的结果也是不对的.</p>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 console.<span class="hljs-built_in">log</span>(object.hasOwnProperty(<span class="hljs-built_in">key</span>));
             
@@ -172,9 +232,13 @@ console.<span class="hljs-built_in">log</span>(<span class="hljs-keyword">Object
 <span class="hljs-keyword">import</span> has from <span class="hljs-string">'has'</span>; <span class="hljs-comment">// https://www.npmjs.com/package/has</span>
 <span class="hljs-comment">// ...</span>
 console.<span class="hljs-built_in">log</span>(has.call(object, <span class="hljs-built_in">key</span>));
-            </code></pre><h2 id="2-7-spread-operator-object-assign">2.7使用<code>spread operator</code>代替Object.assign</h2>
-            <p>即<code>obj = {...obj}</code>这种写法. 实际上这种写法和<code>obj = Object.assign({}, obj)</code>的效果是一样的.</p>
-            <pre><code>
+            </code></pre>
+        <h2 id="2-7-spread-operator-object-assign">2.7使用
+            <code>spread operator</code>代替Object.assign</h2>
+        <p>即
+            <code>obj = {...obj}</code>这种写法. 实际上这种写法和
+            <code>obj = Object.assign({}, obj)</code>的效果是一样的.</p>
+        <pre><code>
 <span class="hljs-comment">// very bad</span>
 <span class="hljs-keyword">const</span> original = <span class="hljs-comment">{ a: 1, b: 2 }</span>;
 <span class="hljs-keyword">const</span> <span class="hljs-keyword">copy</span> = Object.assign(original, <span class="hljs-comment">{ c: 3 }</span>); <span class="hljs-comment">// this mutates `original` ಠ_ಠ</span>
@@ -189,17 +253,20 @@ delete <span class="hljs-keyword">copy</span>.a; <span class="hljs-comment">// s
 <span class="hljs-keyword">const</span> <span class="hljs-keyword">copy</span> = <span class="hljs-comment">{ ...original, c: 3 }</span>; <span class="hljs-comment">// copy =&gt; { a: 1, b: 2, c: 3 }</span>
             
 <span class="hljs-keyword">const</span> <span class="hljs-comment">{ a, ...noA }</span> = <span class="hljs-keyword">copy</span>; <span class="hljs-comment">// noA =&gt; { b: 2, c: 3 }</span>
-            </code></pre><h1 id="3-">3数组</h1>
-            <h2 id="3-1-">3.1不允许是用数组的构造器</h2>
-            <pre><code>
+            </code></pre>
+        <h1 id="3-">3数组</h1>
+        <h2 id="3-1-">3.1不允许是用数组的构造器</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">const</span> items = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>();
             
 <span class="hljs-comment">// good</span>
 <span class="hljs-keyword">const</span> items = [];
-            </code></pre><h2 id="3-2-push-">3.2使用<code>push</code>为数组尾添加一个值</h2>
-            <p>而不是直接使用索引</p>
-            <pre><code>
+            </code></pre>
+        <h2 id="3-2-push-">3.2使用
+            <code>push</code>为数组尾添加一个值</h2>
+        <p>而不是直接使用索引</p>
+        <pre><code>
 <span class="hljs-keyword">const</span> someStack = [];
             
 <span class="hljs-comment">// bad</span>
@@ -207,8 +274,10 @@ someStack[someStack.length] = <span class="hljs-string">'abracadabra'</span>;
             
 <span class="hljs-comment">// good</span>
 someStack.push(<span class="hljs-string">'abracadabra'</span>);
-            </code></pre><h2 id="3-3-">3.3使用<code>...</code>复制数组</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="3-3-">3.3使用
+            <code>...</code>复制数组</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">const</span> <span class="hljs-built_in">len</span> = items.length;
 <span class="hljs-keyword">const</span> itemsCopy = [];
@@ -220,8 +289,11 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
             
 <span class="hljs-comment">// good</span>
 <span class="hljs-keyword">const</span> itemsCopy = [...items];
-            </code></pre><h3 id="3-4-array-from-">3.4使用<code>...</code>而非<code>Array.from</code>转换伪数组</h3>
-            <pre><code>
+            </code></pre>
+        <h3 id="3-4-array-from-">3.4使用
+            <code>...</code>而非
+            <code>Array.from</code>转换伪数组</h3>
+        <pre><code>
 <span class="hljs-keyword">const</span> foo = <span class="hljs-built_in">document</span>.<span class="hljs-built_in">querySelectorAll</span>(<span class="hljs-string">'.foo'</span>);
             
 <span class="hljs-comment">// good</span>
@@ -229,8 +301,9 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
             
 <span class="hljs-comment">// best</span>
 <span class="hljs-keyword">const</span> nodes = [...foo];
-            </code></pre><h2 id="3-5-return-">3.5使用箭头函数时, 应确保回调有一个return, 除非回调只有一个语句</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="3-5-return-">3.5使用箭头函数时, 应确保回调有一个return, 除非回调只有一个语句</h2>
+        <pre><code>
 <span class="hljs-comment">// good</span>
             [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>].map(<span class="hljs-function">(<span class="hljs-params">x</span>) =&gt;</span> {
   <span class="hljs-keyword">const</span> y = x + <span class="hljs-number">1</span>;
@@ -272,8 +345,11 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
             
   <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
 });
-            </code></pre><h2 id="3-6-">3.6如果使用<code>{}[]</code>时代码过长需要换行, 则每个<code>{}[]</code>都应独立一行</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="3-6-">3.6如果使用
+            <code>{}[]</code>时代码过长需要换行, 则每个
+            <code>{}[]</code>都应独立一行</h2>
+        <pre><code>
             // bad
             const arr = <span class="hljs-comment">[
   <span class="hljs-comment">[0, 1]</span>, <span class="hljs-comment">[2, 3]</span>, <span class="hljs-comment">[4, 5]</span>,
@@ -305,10 +381,11 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
               1,
               2,
             ]</span>;
-            </code></pre><h1 id="4-">4解构赋值</h1>
-            <h2 id="4-1-es6-">4.1使用es6解构赋值取对象的值.</h2>
-            <p>因为读起来容易很多</p>
-            <pre><code>
+            </code></pre>
+        <h1 id="4-">4解构赋值</h1>
+        <h2 id="4-1-es6-">4.1使用es6解构赋值取对象的值.</h2>
+        <p>因为读起来容易很多</p>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getFullName</span>(<span class="hljs-params">user</span>) </span>{
   <span class="hljs-keyword">const</span> firstName = user.firstName;
@@ -327,8 +404,9 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getFullName</span>(<span class="hljs-params">{ firstName, lastName }</span>) </span>{
   <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${firstName}</span> <span class="hljs-subst">${lastName}</span>`</span>;
 }
-            </code></pre><h2 id="4-2-">4.2使用解构赋值的方法取数组的值</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="4-2-">4.2使用解构赋值的方法取数组的值</h2>
+        <pre><code>
 <span class="hljs-keyword">const</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>];
             
 <span class="hljs-comment">// bad</span>
@@ -340,8 +418,9 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
             
 <span class="hljs-comment">// 如果需要跳过某个值, 留空即可</span>
 <span class="hljs-keyword">const</span> [first, <span class="hljs-built_in">second</span>, , forth] = arr;
-            </code></pre><h2 id="4-3-">4.3对函数的返回值, 返回对象会比返回数组更好. 因为返回对象然后通过解构赋值可以无需考虑返回值的顺序</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="4-3-">4.3对函数的返回值, 返回对象会比返回数组更好. 因为返回对象然后通过解构赋值可以无需考虑返回值的顺序</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">processInput</span><span class="hljs-params">(input)</span> </span>{
   <span class="hljs-comment">// then a miracle occurs</span>
@@ -359,9 +438,10 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
             
 <span class="hljs-comment">// the caller selects only the data they need</span>
 <span class="hljs-keyword">const</span> { left, top } = processInput(input);
-            </code></pre><h1 id="5-">5字符串</h1>
-            <h2 id="5-1-">5.1如果字符创长度极长, 也不应该为其换行, 应从头写到尾</h2>
-            <pre><code>// bad
+            </code></pre>
+        <h1 id="5-">5字符串</h1>
+        <h2 id="5-1-">5.1如果字符创长度极长, 也不应该为其换行, 应从头写到尾</h2>
+        <pre><code>// bad
             const errorMessage = 'This is a super long error that was thrown because \
             of Batman. When you <span class="hljs-keyword">stop</span> <span class="hljs-keyword">to</span> think about how Batman had anything <span class="hljs-keyword">to</span> <span class="hljs-keyword">do</span> \
 <span class="hljs-keyword">with</span> this, you would <span class="hljs-keyword">get</span> nowhere \
@@ -374,9 +454,11 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
             
             // good
             const errorMessage = '</span>This <span class="hljs-keyword">is</span> a super <span class="hljs-keyword">long</span> <span class="hljs-keyword">error</span> that was thrown because <span class="hljs-keyword">of</span> Batman. <span class="hljs-keyword">When</span> you <span class="hljs-keyword">stop</span> <span class="hljs-keyword">to</span> think about how Batman had anything <span class="hljs-keyword">to</span> <span class="hljs-keyword">do</span> <span class="hljs-keyword">with</span> this, you would <span class="hljs-keyword">get</span> nowhere fast.<span class="hljs-string">';</span>
-            </code></pre><p>换行会影响以后的搜索. (其实过长的字符串很可能是资源文件, 不如抽出一个独立文件存放, 然后import进来使用)</p>
-            <h2 id="5-2-template-string-">5.2使用模板字符串(template string)代替<code>+</code>来连接字符串</h2>
-            <pre><code>
+            </code></pre>
+        <p>换行会影响以后的搜索. (其实过长的字符串很可能是资源文件, 不如抽出一个独立文件存放, 然后import进来使用)</p>
+        <h2 id="5-2-template-string-">5.2使用模板字符串(template string)代替
+            <code>+</code>来连接字符串</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sayHi</span>(<span class="hljs-params">name</span>) </span>{
   <span class="hljs-keyword">return</span> <span class="hljs-string">'How are you, '</span> + name + <span class="hljs-string">'?'</span>;
@@ -396,20 +478,23 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sayHi</span>(<span class="hljs-params">name</span>) </span>{
   <span class="hljs-keyword">return</span> <span class="hljs-string">`How are you, <span class="hljs-subst">${name}</span>?`</span>;
 }
-            </code></pre><h2 id="5-3-eval-">5.3别对字符串用eval()</h2>
-            <p>在我们团队问题不大</p>
-            <h2 id="5-4-">5.4避免不必要的字符转义</h2>
-            <p>在我们团队问题不大, 已经默认用单引号或者反引号表示字符串</p>
-            <pre><code>
+            </code></pre>
+        <h2 id="5-3-eval-">5.3别对字符串用eval()</h2>
+        <p>在我们团队问题不大</p>
+        <h2 id="5-4-">5.4避免不必要的字符转义</h2>
+        <p>在我们团队问题不大, 已经默认用单引号或者反引号表示字符串</p>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">const</span> foo = <span class="hljs-string">'\'</span>this\<span class="hljs-string">' \i\s \"quoted\"'</span>;
             
 <span class="hljs-comment">// good</span>
 <span class="hljs-keyword">const</span> foo = <span class="hljs-string">'\'</span>this\<span class="hljs-string">' is "quoted"'</span>;
 <span class="hljs-keyword">const</span> foo = `my <span class="hljs-keyword">name</span> <span class="hljs-keyword">is</span> <span class="hljs-string">'${name}'</span>`;
-            </code></pre><h1 id="6-">6函数</h1>
-            <h2 id="6-1-args-arguments">6.1使用<code>...args</code>代替arguments</h2>
-            <pre><code>
+            </code></pre>
+        <h1 id="6-">6函数</h1>
+        <h2 id="6-1-args-arguments">6.1使用
+            <code>...args</code>代替arguments</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">concatenateAll</span><span class="hljs-params">()</span> </span>{
   <span class="hljs-keyword">const</span> args = Array.prototype.slice.call(arguments);
@@ -420,10 +505,11 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">concatenateAll</span><span class="hljs-params">(<span class="hljs-rest_arg">...args</span>)</span> </span>{
   <span class="hljs-keyword">return</span> args.join(<span class="hljs-string">''</span>);
 }
-            </code></pre><p>这样args是一个真正的数组</p>
-            <h2 id="6-2-">6.2不要在函数中为参数赋初值, 也不要修改参数的值.</h2>
-            <p>你想要做的事情可以通过参数默认值特性实现.</p>
-            <pre><code>
+            </code></pre>
+        <p>这样args是一个真正的数组</p>
+        <h2 id="6-2-">6.2不要在函数中为参数赋初值, 也不要修改参数的值.</h2>
+        <p>你想要做的事情可以通过参数默认值特性实现.</p>
+        <pre><code>
 <span class="hljs-comment">// really bad</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleThings</span><span class="hljs-params">(opts)</span> </span>{
   <span class="hljs-comment">// No! We shouldn’t mutate function arguments.</span>
@@ -445,9 +531,10 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleThings</span><span class="hljs-params">(opts = {})</span> </span>{
   <span class="hljs-comment">// ...</span>
 }
-            </code></pre><h2 id="6-3-">6.3使用参数默认值特性后, 函数不能因此产生副作用</h2>
-            <p>关于副作用见函数式编程中对副作用的定义. 简单而言就是, 对同样的输入, 函数的输出也应该是一样的.</p>
-            <pre><code>
+            </code></pre>
+        <h2 id="6-3-">6.3使用参数默认值特性后, 函数不能因此产生副作用</h2>
+        <p>关于副作用见函数式编程中对副作用的定义. 简单而言就是, 对同样的输入, 函数的输出也应该是一样的.</p>
+        <pre><code>
 <span class="hljs-keyword">var</span> b = 1;
 <span class="hljs-comment">// bad</span>
             function <span class="hljs-keyword">count</span>(a = b++) {
@@ -457,8 +544,9 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 <span class="hljs-keyword">count</span>();  <span class="hljs-comment">// 2</span>
 <span class="hljs-keyword">count</span>(3); <span class="hljs-comment">// 3</span>
 <span class="hljs-keyword">count</span>();  <span class="hljs-comment">// 3</span>
-            </code></pre><h2 id="6-4-">6.4参数默认值必须放在最后</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="6-4-">6.4参数默认值必须放在最后</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleThings</span><span class="hljs-params">(opts = {}, name)</span> </span>{
   <span class="hljs-comment">// ...</span>
@@ -468,16 +556,23 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleThings</span><span class="hljs-params">(name, opts = {})</span> </span>{
   <span class="hljs-comment">// ...</span>
 }
-            </code></pre><h2 id="6-5-new-function-">6.5禁止使用<code>new Function()</code></h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="6-5-new-function-">6.5禁止使用
+            <code>new Function()</code>
+        </h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">var</span> <span class="hljs-keyword">add</span> = <span class="hljs-keyword">new</span> <span class="hljs-function"><span class="hljs-keyword">Function</span><span class="hljs-params">(<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'return a + b'</span>)</span>;</span>
             
 <span class="hljs-comment">// still bad</span>
 <span class="hljs-keyword">var</span> subtract = <span class="hljs-function"><span class="hljs-keyword">Function</span><span class="hljs-params">(<span class="hljs-string">'a'</span>, <span class="hljs-string">'b'</span>, <span class="hljs-string">'return a - b'</span>)</span>;</span>
-            </code></pre><h2 id="6-6-">6.6空格</h2>
-            <p><code>function</code>, <code>()</code>, <code>{}</code>之间必须留有空格, 如</p>
-            <pre><code>
+            </code></pre>
+        <h2 id="6-6-">6.6空格</h2>
+        <p>
+            <code>function</code>,
+            <code>()</code>,
+            <code>{}</code>之间必须留有空格, 如</p>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">const</span> f = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>{};
 <span class="hljs-keyword">const</span> g = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span></span>{};
@@ -493,9 +588,10 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
             
     }
 }
-            </code></pre><h2 id="6-7-">6.7禁止修改参数值</h2>
-            <p>如果传入值为一个对象, 修改参数值会影响调用该函数的代码的逻辑, 应尽可能减少函数的副作用</p>
-            <pre><code>
+            </code></pre>
+        <h2 id="6-7-">6.7禁止修改参数值</h2>
+        <p>如果传入值为一个对象, 修改参数值会影响调用该函数的代码的逻辑, 应尽可能减少函数的副作用</p>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f1</span>(<span class="hljs-params">obj</span>) </span>{
               obj.key = <span class="hljs-number">1</span>;
@@ -505,9 +601,12 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f2</span>(<span class="hljs-params">obj</span>) </span>{
   <span class="hljs-keyword">const</span> key = <span class="hljs-built_in">Object</span>.prototype.hasOwnProperty.call(obj, <span class="hljs-string">'key'</span>) ? obj.key : <span class="hljs-number">1</span>;
 }
-            </code></pre><h2 id="6-8-">6.8不允许给参数重赋值</h2>
-            <p>当需要使用<code>arguments</code>时, 对参数重新赋值会导致<code>argument</code>出现超出预期的值, 在V8虚拟机中这种做法会导致优化失效的问题.</p>
-            <pre><code>
+            </code></pre>
+        <h2 id="6-8-">6.8不允许给参数重赋值</h2>
+        <p>当需要使用
+            <code>arguments</code>时, 对参数重新赋值会导致
+            <code>argument</code>出现超出预期的值, 在V8虚拟机中这种做法会导致优化失效的问题.</p>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f1</span><span class="hljs-params">(a)</span> </span>{
               a = <span class="hljs-number">1</span>;
@@ -528,9 +627,12 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f4</span><span class="hljs-params">(a = 1)</span> </span>{
   <span class="hljs-comment">// ...</span>
 }
-            </code></pre><h2 id="6-9-apply-">6.9使用<code>...</code>代替<code>apply</code>为参数数量不定的函数传值</h2>
-            <p>因为写出来的代码更好理解</p>
-            <pre><code>
+            </code></pre>
+        <h2 id="6-9-apply-">6.9使用
+            <code>...</code>代替
+            <code>apply</code>为参数数量不定的函数传值</h2>
+        <p>因为写出来的代码更好理解</p>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
             const x = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>];
             console.log.apply(console, x);
@@ -544,8 +646,9 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
             
 <span class="hljs-comment">// good</span>
             new Date(...[<span class="hljs-number">2016</span>, <span class="hljs-number">8</span>, <span class="hljs-number">5</span>]);
-            </code></pre><h2 id="6-10-">6.10定义函数时函数参数较多, 或者所调用的函数参数较多, 则应在函数括号处空行, 然后直接按照项目缩进配置进行缩进, 例如:</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="6-10-">6.10定义函数时函数参数较多, 或者所调用的函数参数较多, 则应在函数括号处空行, 然后直接按照项目缩进配置进行缩进, 例如:</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">bar,
                          baz,
@@ -573,12 +676,16 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
               bar,
               baz,
             );
-            </code></pre><h1 id="7-">7箭头函数</h1>
-            <hr>
-            <h2 id="7-1-">7.1在任何你需要使用匿名函数场景(如作为一个回调函数传给某个函数), 都使用箭头函数.</h2>
-            <p>和function() {}定义的匿名函数不同的是, 箭头函数的this是在你写这一段代码就决定好了的, 比如回调函数, <code>function() {}</code>的this指向window, 而箭头函数和调用者的this保持一致. 因此可以使用箭头函数取代<code>bind(this)</code>, <code>apply(this, ...)</code>, <code>call(this, ...)</code>来绑定this.
-            (当然是大部分场景, 有些第三方库会强制将回调函数与自己的this绑定在一起, 这就没法了)</p>
-            <pre><code>
+            </code></pre>
+        <h1 id="7-">7箭头函数</h1>
+        <hr>
+        <h2 id="7-1-">7.1在任何你需要使用匿名函数场景(如作为一个回调函数传给某个函数), 都使用箭头函数.</h2>
+        <p>和function() {}定义的匿名函数不同的是, 箭头函数的this是在你写这一段代码就决定好了的, 比如回调函数,
+            <code>function() {}</code>的this指向window, 而箭头函数和调用者的this保持一致. 因此可以使用箭头函数取代
+            <code>bind(this)</code>,
+            <code>apply(this, ...)</code>,
+            <code>call(this, ...)</code>来绑定this. (当然是大部分场景, 有些第三方库会强制将回调函数与自己的this绑定在一起, 这就没法了)</p>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
             [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>].map(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">x</span>) </span>{
   <span class="hljs-keyword">const</span> y = x + <span class="hljs-number">1</span>;
@@ -590,10 +697,17 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
   <span class="hljs-keyword">const</span> y = x + <span class="hljs-number">1</span>;
   <span class="hljs-keyword">return</span> x * y;
 });
-            </code></pre><h2 id="7-2-implicit-return-">7.2如果回调函数只有一条语句, 参数只有一个, 而且操作无副作用, 那么可以使用隐含返回(implicit return)</h2>
-            <p>即回调函数参数的<code>()</code>, 与函数块的<code>{}</code>, 还有函数的<code>return</code>, 都应该省略.</p>
-            <p>如不符合上述任一要求, 则<code>()</code>, <code>{}</code>还有<code>return</code>都不应该省略</p>
-            <pre><code>
+            </code></pre>
+        <h2 id="7-2-implicit-return-">7.2如果回调函数只有一条语句, 参数只有一个, 而且操作无副作用, 那么可以使用隐含返回(implicit return)</h2>
+        <p>即回调函数参数的
+            <code>()</code>, 与函数块的
+            <code>{}</code>, 还有函数的
+            <code>return</code>, 都应该省略.</p>
+        <p>如不符合上述任一要求, 则
+            <code>()</code>,
+            <code>{}</code>还有
+            <code>return</code>都不应该省略</p>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
             [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>].map(<span class="hljs-function"><span class="hljs-params">number</span> =&gt;</span> {
   <span class="hljs-keyword">const</span> nextNumber = number + <span class="hljs-number">1</span>;
@@ -631,8 +745,10 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
             foo(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
               bool = <span class="hljs-literal">true</span>;
 });
-            </code></pre><h2 id="7-3-">7.3使用隐含返回时如果函数体过长, 则应该使用括号将函数体包括起来, 然后在每个<code>(</code>后换行</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="7-3-">7.3使用隐含返回时如果函数体过长, 则应该使用括号将函数体包括起来, 然后在每个
+            <code>(</code>后换行</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
             [<span class="hljs-string">'get'</span>, <span class="hljs-string">'post'</span>, <span class="hljs-string">'put'</span>].map(<span class="hljs-function"><span class="hljs-params">httpMethod</span> =&gt;</span> <span class="hljs-built_in">Object</span>.prototype.hasOwnProperty.call(
                 httpMagicObjectWithAVeryLongName,
@@ -647,8 +763,12 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
                 httpMethod,
               )
             ));
-            </code></pre><h2 id="7-4-">7.4当需要箭头符号<code>=&gt;</code>, 比较符号<code>&gt;=</code>, <code>&lt;=</code>混用时, 添加括号避免混淆</h2>
-            <pre><code>// <span class="hljs-keyword">bad
+            </code></pre>
+        <h2 id="7-4-">7.4当需要箭头符号
+            <code>=&gt;</code>, 比较符号
+            <code>&gt;=</code>,
+            <code>&lt;=</code>混用时, 添加括号避免混淆</h2>
+        <pre><code>// <span class="hljs-keyword">bad
             </span><span class="hljs-symbol">const</span> <span class="hljs-keyword">itemHeight </span>= <span class="hljs-keyword">item </span>=&gt; <span class="hljs-keyword">item.height </span>&gt; <span class="hljs-number">256</span> ? <span class="hljs-keyword">item.largeSize </span>: <span class="hljs-keyword">item.smallSize;
             </span>
             // <span class="hljs-keyword">bad
@@ -662,9 +782,12 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
               const { height, largeSize, smallSize } = <span class="hljs-keyword">item;
             </span>  return height &gt; <span class="hljs-number">256</span> ? largeSize : smallSize<span class="hljs-comment">;</span>
 }<span class="hljs-comment">;</span>
-            </code></pre><h1 id="8-">8类与构造器</h1>
-            <h2 id="8-1-class-">8.1不要直接修改原型链了, 改使用<code>class</code></h2>
-            <pre><code>
+            </code></pre>
+        <h1 id="8-">8类与构造器</h1>
+        <h2 id="8-1-class-">8.1不要直接修改原型链了, 改使用
+            <code>class</code>
+        </h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Queue</span>(<span class="hljs-params">contents = []</span>) </span>{
   <span class="hljs-keyword">this</span>.queue = [...contents];
@@ -686,8 +809,10 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
     <span class="hljs-keyword">return</span> value;
   }
 }
-            </code></pre><h2 id="8-2-extend-">8.2用<code>extend</code>取代原型链继承</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="8-2-extend-">8.2用
+            <code>extend</code>取代原型链继承</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
             const inherits = require(<span class="hljs-symbol">'inherit</span>s');
             function <span class="hljs-type">PeekableQueue</span>(contents) {
@@ -704,8 +829,10 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.queue[<span class="hljs-number">0</span>];
   }
 }
-            </code></pre><h2 id="8-3-this-">8.3可以的话, 类的方法返回<code>this</code>以实现链式调用</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="8-3-this-">8.3可以的话, 类的方法返回
+            <code>this</code>以实现链式调用</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
             Jedi.prototype.jump = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>{
   <span class="hljs-keyword">this</span>.jumping = <span class="hljs-literal">true</span>;
@@ -737,8 +864,10 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
             
             luke.jump()
               .setHeight(<span class="hljs-number">20</span>);
-            </code></pre><h2 id="8-4-tostring-">8.4重写<code>toString</code>方法是可以的, 但是要保证不能有副作用</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="8-4-tostring-">8.4重写
+            <code>toString</code>方法是可以的, 但是要保证不能有副作用</h2>
+        <pre><code>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Jedi</span> </span>{
   <span class="hljs-keyword">constructor</span>(options = {}) {
     <span class="hljs-keyword">this</span>.name = options.name || <span class="hljs-string">'no name'</span>;
@@ -752,9 +881,10 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
     <span class="hljs-keyword">return</span> `Jedi - ${<span class="hljs-keyword">this</span>.getName()}`;
   }
 }
-            </code></pre><h2 id="8-5-">8.5空构造器是没必要的, 只是给父类传参的构造器也是没有必要的</h2>
-            <p>因为子类不写constructor表示不传</p>
-            <pre><code>
+            </code></pre>
+        <h2 id="8-5-">8.5空构造器是没必要的, 只是给父类传参的构造器也是没有必要的</h2>
+        <p>因为子类不写constructor表示不传</p>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Jedi</span> </span>{
               constructor() {}
@@ -778,8 +908,9 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
     <span class="hljs-keyword">this</span>.name = <span class="hljs-symbol">'Re</span>y';
   }
 }
-            </code></pre><h2 id="8-6-">8.6不允许重复声明类成员</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="8-6-">8.6不允许重复声明类成员</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> </span>{
               bar() { <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>; }
@@ -795,10 +926,11 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Foo</span> </span>{
               bar() { <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>; }
 }
-            </code></pre><p>因为只有最后声明的成员是有效的, 会对代码理解造成不必要的麻烦</p>
-            <h1 id="9-module-">9模块(module)</h1>
-            <h2 id="9-1-es6-">9.1尽可能使用es6模块系统</h2>
-            <pre><code>
+            </code></pre>
+        <p>因为只有最后声明的成员是有效的, 会对代码理解造成不必要的麻烦</p>
+        <h1 id="9-module-">9模块(module)</h1>
+        <h2 id="9-1-es6-">9.1尽可能使用es6模块系统</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">const</span> AirbnbStyleGuide = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./AirbnbStyleGuide'</span>);
 <span class="hljs-built_in">module</span>.exports = AirbnbStyleGuide.es6;
@@ -810,8 +942,9 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 <span class="hljs-comment">// best</span>
 <span class="hljs-keyword">import</span> { es6 } <span class="hljs-keyword">from</span> <span class="hljs-string">'./AirbnbStyleGuide'</span>;
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> es6;
-            </code></pre><h2 id="9-2-">9.2仅在文件开头导入所需要的模块</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="9-2-">9.2仅在文件开头导入所需要的模块</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">import</span> foo <span class="hljs-keyword">from</span> <span class="hljs-string">'foo'</span>;
 <span class="hljs-comment">// … some other imports … //</span>
@@ -825,8 +958,9 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
               named1,
               named2,
 } <span class="hljs-keyword">from</span> <span class="hljs-string">'foo'</span>;
-            </code></pre><h2 id="9-3-">9.3不要导出可变的变量</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="9-3-">9.3不要导出可变的变量</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">let</span> foo = <span class="hljs-number">3</span>;
 <span class="hljs-keyword">export</span> { foo };
@@ -834,13 +968,18 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 <span class="hljs-comment">// good</span>
 <span class="hljs-keyword">const</span> foo = <span class="hljs-number">3</span>;
 <span class="hljs-keyword">export</span> { foo };
-            </code></pre><p>和commonJS不同, es6 module会静态分析导出的内容 ---- 比如例子中的foo在运行时的某个时间点被修改为10, 但是引入foo的模块的值只会还是3, 而不是10.</p>
-            <h1 id="10-">10变量</h1>
-            <hr>
-            <h2 id="10-1-const-let-">10.1必须使用<code>const</code>和<code>let</code>声明变量</h2>
-            <p>而且优先使用const, 这个习惯很好, 变量不变的代码容易理解得多</p>
-            <h2 id="10-2-const-let-">10.2一个<code>const</code>或者<code>let</code>只声明一个变量</h2>
-            <pre><code>
+            </code></pre>
+        <p>和commonJS不同, es6 module会静态分析导出的内容 ---- 比如例子中的foo在运行时的某个时间点被修改为10, 但是引入foo的模块的值只会还是3, 而不是10.</p>
+        <h1 id="10-">10变量</h1>
+        <hr>
+        <h2 id="10-1-const-let-">10.1必须使用
+            <code>const</code>和
+            <code>let</code>声明变量</h2>
+        <p>而且优先使用const, 这个习惯很好, 变量不变的代码容易理解得多</p>
+        <h2 id="10-2-const-let-">10.2一个
+            <code>const</code>或者
+            <code>let</code>只声明一个变量</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">const</span> items = getItems(),
                 goSportsTeam = <span class="hljs-literal">true</span>,
@@ -856,13 +995,17 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 <span class="hljs-keyword">const</span> items = getItems();
 <span class="hljs-keyword">const</span> goSportsTeam = <span class="hljs-literal">true</span>;
 <span class="hljs-keyword">const</span> dragonball = <span class="hljs-string">'z'</span>;
-            </code></pre><p>原因如下:</p>
-            <ol>
-            <li>第二个例子所示, 因为没分清<code>;</code>和<code>,</code>导致变量<code>goSportsTeam</code>成为全局变量, 而且很难发现.</li>
+            </code></pre>
+        <p>原因如下:</p>
+        <ol>
+            <li>第二个例子所示, 因为没分清
+                <code>;</code>和
+                <code>,</code>导致变量
+                <code>goSportsTeam</code>成为全局变量, 而且很难发现.</li>
             <li>调试器很希望你一行写一个.</li>
-            </ol>
-            <h2 id="10-3-">10.3不允许链式声明变量</h2>
-            <pre><code>
+        </ol>
+        <h2 id="10-3-">10.3不允许链式声明变量</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
             (<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">example</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-comment">// JavaScript interprets this as</span>
@@ -888,9 +1031,12 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 <span class="hljs-built_in">console</span>.log(c); <span class="hljs-comment">// throws ReferenceError</span>
             
 <span class="hljs-comment">// the same applies for `const`</span>
-            </code></pre><p>如上述例子, b, c被隐式声明为全局变量.</p>
-            <h2 id="10-4-">10.4避免在<code>=</code>后添加空行, 如果因为一行太长必须换行, 则为<code>=</code>右边的内容添加一个括号</h2>
-            <pre><code>
+            </code></pre>
+        <p>如上述例子, b, c被隐式声明为全局变量.</p>
+        <h2 id="10-4-">10.4避免在
+            <code>=</code>后添加空行, 如果因为一行太长必须换行, 则为
+            <code>=</code>右边的内容添加一个括号</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">const</span> foo =
               superLongLongLongLongLongLongLongLongFunctionName();
@@ -906,19 +1052,20 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
             
 <span class="hljs-comment">// good</span>
 <span class="hljs-keyword">const</span> foo = <span class="hljs-string">'superLongLongLongLongLongLongLongLongString'</span>;
-            </code></pre><h1 id="11-">11变量提升</h1>
-            <hr>
-            <p>什么是变量提升
-            现代编程语言为我们提供了一个便利: 可以在声明函数之前调用该函数</p>
-            <pre><code>
+            </code></pre>
+        <h1 id="11-">11变量提升</h1>
+        <hr>
+        <p>什么是变量提升 现代编程语言为我们提供了一个便利: 可以在声明函数之前调用该函数</p>
+        <pre><code>
 <span class="hljs-comment">// works</span>
             a();
             
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>{
     <span class="hljs-built_in">console</span>.log(<span class="hljs-number">123</span>);
 }
-            </code></pre><p>但在部分场景这有趣得多:</p>
-            <pre><code>
+            </code></pre>
+        <p>但在部分场景这有趣得多:</p>
+        <pre><code>
 <span class="hljs-comment">// 当然现实中没人会这么做, 只是为了举例</span>
             (<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span><span class="hljs-comment">{
                 a = 5;
@@ -926,42 +1073,57 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
                 var a = 10;
                 console.log(a);
 }</span>)<span class="hljs-params">()</span>;</span>
-            </code></pre><p>输出结果是: 先undefined, 然后是10, 原因是<code>var</code>在作用域中有变量提升的效果, 上述代码等价于:</p>
-            <pre><code>(<span class="hljs-name">function</span>(){
+            </code></pre>
+        <p>输出结果是: 先undefined, 然后是10, 原因是
+            <code>var</code>在作用域中有变量提升的效果, 上述代码等价于:</p>
+        <pre><code>(<span class="hljs-name">function</span>(){
                 var a;
                 a = <span class="hljs-number">5</span><span class="hljs-comment">;</span>
                 console.log(<span class="hljs-name">window.a</span>)<span class="hljs-comment">;</span>
                 a = <span class="hljs-number">10</span><span class="hljs-comment">;</span>
                 console.log(<span class="hljs-name">a</span>)<span class="hljs-comment">;</span>
 })()<span class="hljs-comment">;</span>
-            </code></pre><p>可见, 上述代码其实并没有在全局作用域声明<code>a</code>, 因此<code>window.a</code>为<code>undefined</code>. 需要注意的是, 初始化的部分并<strong>不会</strong>跟着一起提升.</p>
-            <p>使用<code>const</code>和<code>let</code>声明变量不会导致变量提升, 如果在变量声明之前引用该变量会抛出ReferenceError, 他们有(Temporal Dead Zone)[<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_Dead_Zone_and_errors_with_let">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_Dead_Zone_and_errors_with_let</a>], 比如:</p>
-            <pre><code>
+            </code></pre>
+        <p>可见, 上述代码其实并没有在全局作用域声明
+            <code>a</code>, 因此
+            <code>window.a</code>为
+            <code>undefined</code>. 需要注意的是, 初始化的部分并
+            <strong>不会</strong>跟着一起提升.</p>
+        <p>使用
+            <code>const</code>和
+            <code>let</code>声明变量不会导致变量提升, 如果在变量声明之前引用该变量会抛出ReferenceError, 他们有(Temporal Dead Zone)[
+            <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_Dead_Zone_and_errors_with_let">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_Dead_Zone_and_errors_with_let</a>],
+            比如:</p>
+        <pre><code>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">do_something</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-built_in">console</span>.log(bar); <span class="hljs-comment">// 1 undefined</span>
   <span class="hljs-built_in">console</span>.log(foo); <span class="hljs-comment">// 2 ReferenceError</span>
   <span class="hljs-keyword">var</span> bar = <span class="hljs-number">1</span>; <span class="hljs-comment">// 3</span>
   <span class="hljs-keyword">let</span> foo = <span class="hljs-number">2</span>;
 }
-            </code></pre><p>可见二者报错是不一样的</p>
-            <p>上述代码的1, 2, 3行与foo的初始化代码都处于Temporal Dead Zone, 在Temporal Dead Zone中引用foo会抛出<code>ReferenceError</code>.</p>
-            <p>Temporal Dead Zone有几个特性:</p>
-            <ol>
+            </code></pre>
+        <p>可见二者报错是不一样的</p>
+        <p>上述代码的1, 2, 3行与foo的初始化代码都处于Temporal Dead Zone, 在Temporal Dead Zone中引用foo会抛出
+            <code>ReferenceError</code>.</p>
+        <p>Temporal Dead Zone有几个特性:</p>
+        <ol>
             <li>同一个作用域内不允许重复声明同一个变量.</li>
-            </ol>
-            <pre><code>
+        </ol>
+        <pre><code>
 <span class="hljs-keyword">let</span> <span class="hljs-attr">a</span> = <span class="hljs-number">1</span>;
 <span class="hljs-keyword">let</span> <span class="hljs-attr">a</span> = <span class="hljs-number">1</span>; // SyntaxError
-            </code></pre><pre><code>
+            </code></pre>
+        <pre><code>
             // 作用域不同的话则可以
 <span class="hljs-keyword">let</span> <span class="hljs-attr">a</span> = <span class="hljs-number">1</span>;
             {
     <span class="hljs-keyword">let</span> <span class="hljs-attr">a</span> = <span class="hljs-number">2</span>;
 }
-            </code></pre><ol>
+            </code></pre>
+        <ol>
             <li>每(用let或者const)声明一个变量都会新建一个新的Temporal Dead Zone</li>
-            </ol>
-            <pre><code>
+        </ol>
+        <pre><code>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">go</span>(<span class="hljs-params">n</span>) </span>{
   <span class="hljs-comment">// n here is defined!</span>
   <span class="hljs-built_in">console</span>.log(n); <span class="hljs-comment">// Object {a: [1,2,3]}</span>
@@ -972,11 +1134,16 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 }
             
             go({<span class="hljs-attr">a</span>: [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]});
-            </code></pre><p>例子中for新建了一个作用域, 同时这个作用域中有<code>let n</code>, 那么该作用域中TDZ中对n的引用也应该指向该作用域中的n, 而<code>of n.a</code>处于TDZ, 那么便抛出<code>ReferenceError</code>. 需要注意的是, tslint中禁止了这种写法, 即不允许shadow variable, 原因便是这个, 这个bug太让人迷惑了.</p>
-            <ol>
-            <li>TDZ不会被<code>var</code>影响</li>
-            </ol>
-            <pre><code>
+            </code></pre>
+        <p>例子中for新建了一个作用域, 同时这个作用域中有
+            <code>let n</code>, 那么该作用域中TDZ中对n的引用也应该指向该作用域中的n, 而
+            <code>of n.a</code>处于TDZ, 那么便抛出
+            <code>ReferenceError</code>. 需要注意的是, tslint中禁止了这种写法, 即不允许shadow variable, 原因便是这个, 这个bug太让人迷惑了.</p>
+        <ol>
+            <li>TDZ不会被
+                <code>var</code>影响</li>
+        </ol>
+        <pre><code>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span>(<span class="hljs-params"></span>)</span>{
    <span class="hljs-keyword">var</span> foo = <span class="hljs-number">33</span>;
    <span class="hljs-keyword">if</span> (<span class="hljs-literal">true</span>) {
@@ -984,9 +1151,12 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
    }
 }
             test();
-            </code></pre><p>尽管<code>if</code>语句作用域外有var声明的变量, 但<code>if</code>语句作用域内的TDZ依然有效.</p>
-            <h2 id="11-1-">11.1以下写法会导致函数不提升</h2>
-            <pre><code>
+            </code></pre>
+        <p>尽管
+            <code>if</code>语句作用域外有var声明的变量, 但
+            <code>if</code>语句作用域内的TDZ依然有效.</p>
+        <h2 id="11-1-">11.1以下写法会导致函数不提升</h2>
+        <pre><code>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">example</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-built_in">console</span>.log(named); <span class="hljs-comment">// =&gt; undefined</span>
             
@@ -1010,21 +1180,28 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'named'</span>);
   };
 }
-            </code></pre><p>即为函数命名后, 不会提升函数声明, 也不会提升函数定义.</p>
-            <h1 id="12-">12比较操作符</h1>
-            <hr>
-            <h2 id="12-1-">12.1使用<code>===</code>和<code>!==</code>代替<code>==</code>和<code>!=</code></h2>
-            <h2 id="12-2-if-toboolean-">12.2<code>if</code>会使用toBoolean分析其内部的表达式, 分析规则为:</h2>
-            <ul>
+            </code></pre>
+        <p>即为函数命名后, 不会提升函数声明, 也不会提升函数定义.</p>
+        <h1 id="12-">12比较操作符</h1>
+        <hr>
+        <h2 id="12-1-">12.1使用
+            <code>===</code>和
+            <code>!==</code>代替
+            <code>==</code>和
+            <code>!=</code>
+        </h2>
+        <h2 id="12-2-if-toboolean-">12.2
+            <code>if</code>会使用toBoolean分析其内部的表达式, 分析规则为:</h2>
+        <ul>
             <li>Object为true</li>
             <li>Undefined为false</li>
             <li>Null为false</li>
             <li>Booleans根据其值返回值</li>
             <li>Numbers: +0, -0, NaN为false, 其他情况是true</li>
             <li>String: 空字符串为false, 其他true</li>
-            </ul>
-            <h2 id="12-3-shortcut">12.3对字符串与数字类型使用显式的比较, 其他类型使用shortcut</h2>
-            <pre><code>
+        </ul>
+        <h2 id="12-3-shortcut">12.3对字符串与数字类型使用显式的比较, 其他类型使用shortcut</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">if</span> <span class="hljs-comment">(isValid === true)</span> {
   <span class="hljs-comment">// ...</span>
@@ -1054,8 +1231,9 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 <span class="hljs-keyword">if</span> <span class="hljs-comment">(collection.length &gt; 0)</span> {
   <span class="hljs-comment">// ...</span>
 }
-            </code></pre><h2 id="12-4-switch-case-default-">12.4在switch中为case和default添加花括号</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="12-4-switch-case-default-">12.4在switch中为case和default添加花括号</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">switch</span> (foo) {
   <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
@@ -1097,9 +1275,10 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
     <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">C</span> </span>{}
   }
 }
-            </code></pre><h2 id="12-5-">12.5三目运算符</h2>
-            <p>不允许嵌套三目运算符, 而且尽可能一行解决, 如果是很麻烦的比较, 为何不直接用if?</p>
-            <pre><code>
+            </code></pre>
+        <h2 id="12-5-">12.5三目运算符</h2>
+        <p>不允许嵌套三目运算符, 而且尽可能一行解决, 如果是很麻烦的比较, 为何不直接用if?</p>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">const</span> foo = maybe1 &gt; maybe2
               ? <span class="hljs-string">"bar"</span>
@@ -1115,8 +1294,9 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
             
 <span class="hljs-comment">// best</span>
 <span class="hljs-keyword">const</span> foo = maybe1 &gt; maybe2 ? <span class="hljs-string">'bar'</span> : maybeNull;
-            </code></pre><h2 id="12-6-">12.6避免不必要的三目运算符</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="12-6-">12.6避免不必要的三目运算符</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">const</span> foo = a ? a : b;
 <span class="hljs-keyword">const</span> bar = c ? <span class="hljs-literal">true</span> : <span class="hljs-literal">false</span>;
@@ -1126,8 +1306,9 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 <span class="hljs-keyword">const</span> foo = a || b;
 <span class="hljs-keyword">const</span> bar = !!c;
 <span class="hljs-keyword">const</span> baz = !c;
-            </code></pre><h2 id="12-7-">12.7 在比较符号两端的表达式内如果有运算符号, 则应该为这些表达式添加括号</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="12-7-">12.7 在比较符号两端的表达式内如果有运算符号, 则应该为这些表达式添加括号</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
             const foo = a &amp;&amp; b &lt; <span class="hljs-number">0</span> || c &gt; <span class="hljs-number">0</span> || d + <span class="hljs-number">1</span> === <span class="hljs-number">0</span>;
             
@@ -1153,10 +1334,11 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
             
 <span class="hljs-comment">// good</span>
             const bar = a + b / c * d;
-            </code></pre><h1 id="13blocks">13Blocks</h1>
-            <hr>
-            <h2 id="13-1-block-">13.1多行的block必须使用括号括起来</h2>
-            <pre><code>
+            </code></pre>
+        <h1 id="13blocks">13Blocks</h1>
+        <hr>
+        <h2 id="13-1-block-">13.1多行的block必须使用括号括起来</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">if</span> (test)
   <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
@@ -1176,8 +1358,12 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bar</span><span class="hljs-params">()</span> </span>{
   <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
 }
-            </code></pre><h2 id="13-2-else-else-if-">13.2使用<code>else</code>时, <code>else</code>需要放在<code>if</code>的闭合括号后</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="13-2-else-else-if-">13.2使用
+            <code>else</code>时,
+            <code>else</code>需要放在
+            <code>if</code>的闭合括号后</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">if</span> (<span class="hljs-keyword">test</span>) {
     <span class="hljs-comment">//</span>
@@ -1192,8 +1378,17 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 } <span class="hljs-keyword">else</span> {
     <span class="hljs-comment">//</span>
 }
-            </code></pre><h2 id="13-3-if-return-else-return-else-else-if-return-return-">13.3如果<code>if</code>中有<code>return</code>, 那么<code>else</code>中的<code>return</code>是没有必要的, 应该直接放到<code>else</code>外; <code>else if</code>中的return则应该根据条件不同, 分别<code>return</code></h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="13-3-if-return-else-return-else-else-if-return-return-">13.3如果
+            <code>if</code>中有
+            <code>return</code>, 那么
+            <code>else</code>中的
+            <code>return</code>是没有必要的, 应该直接放到
+            <code>else</code>外;
+            <code>else if</code>中的return则应该根据条件不同, 分别
+            <code>return</code>
+        </h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span><span class="hljs-params">()</span> </span>{
   <span class="hljs-keyword">if</span> (x) {
@@ -1253,9 +1448,12 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
     <span class="hljs-keyword">return</span> z;
   }
 }
-            </code></pre><h1 id="17-">17流程控制语句</h1>
-            <h2 id="17-1-if-while-">17.1如果流程控制语句(<code>if</code>, <code>while</code>)的表达式太长, 那么可以在每一个表达式后空行, 逻辑运算符号放在每一行的行首</h2>
-            <pre><code>
+            </code></pre>
+        <h1 id="17-">17流程控制语句</h1>
+        <h2 id="17-1-if-while-">17.1如果流程控制语句(
+            <code>if</code>,
+            <code>while</code>)的表达式太长, 那么可以在每一个表达式后空行, 逻辑运算符号放在每一行的行首</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-selector-tag">if</span> ((foo === <span class="hljs-number">123</span> || bar === <span class="hljs-string">'abc'</span>) &amp;&amp; doesItLookGoodWhenItBecomesThatLong() &amp;&amp; isThisReallyHappening()) {
   <span class="hljs-selector-tag">thing1</span>();
@@ -1302,9 +1500,10 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 <span class="hljs-selector-tag">if</span> (foo === <span class="hljs-number">123</span> &amp;&amp; bar === <span class="hljs-string">'abc'</span>) {
   <span class="hljs-selector-tag">thing1</span>();
 }
-            </code></pre><h2 id="17-2-">17.2以下这种炫技的写法不可取.</h2>
-            <p>请使用流程控制语句, 以节约代码阅读时间</p>
-            <pre><code>
+            </code></pre>
+        <h2 id="17-2-">17.2以下这种炫技的写法不可取.</h2>
+        <p>请使用流程控制语句, 以节约代码阅读时间</p>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
             !<span class="hljs-selector-tag">isRunning</span> <span class="hljs-selector-tag">&amp;</span><span class="hljs-selector-tag">&amp;</span> <span class="hljs-selector-tag">startRunning</span>();
             
@@ -1312,9 +1511,11 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 <span class="hljs-selector-tag">if</span> (!isRunning) {
   <span class="hljs-selector-tag">startRunning</span>();
 }
-            </code></pre><h1 id="18-">18注释</h1>
-            <h2 id="18-1-">18.1<code>使用/** ... */</code>进行多行注释</h2>
-            <pre><code>
+            </code></pre>
+        <h1 id="18-">18注释</h1>
+        <h2 id="18-1-">18.1
+            <code>使用/** ... */</code>进行多行注释</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-comment">// make() returns a new element</span>
 <span class="hljs-comment">// based on the passed in tag name</span>
@@ -1339,8 +1540,11 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
             
   <span class="hljs-keyword">return</span> element;
 }
-            </code></pre><h2 id="18-2-">18.2使用<code>//</code>进行单行注释. <code>//</code>后应跟一个空格, 注释应该放置在待说明代码的上方, 而且注释前需要空一行(当注释在代码块的第一行时, 不需要空行).</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="18-2-">18.2使用
+            <code>//</code>进行单行注释.
+            <code>//</code>后应跟一个空格, 注释应该放置在待说明代码的上方, 而且注释前需要空一行(当注释在代码块的第一行时, 不需要空行).</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
             const active = <span class="hljs-literal">true</span>;  <span class="hljs-comment">// is current tab</span>
             
@@ -1374,8 +1578,11 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
             
   <span class="hljs-keyword">return</span> <span class="hljs-class"><span class="hljs-keyword">type</span></span>;
 }
-            </code></pre><h2 id="18-3-todo-fixme-">18.3使用<code>// TODO</code>与<code>// FIXME</code>对问题或者需要做的事情作出标识</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="18-3-todo-fixme-">18.3使用
+            <code>// TODO</code>与
+            <code>// FIXME</code>对问题或者需要做的事情作出标识</h2>
+        <pre><code>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Calculator</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Abacus</span> </span>{
               constructor() {
     <span class="hljs-keyword">super</span>();
@@ -1393,10 +1600,11 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
     <span class="hljs-keyword">this</span>.total = <span class="hljs-number">0</span>;
   }
 }
-            </code></pre><p>ps: vscode还找不到TODO管理工具, 倒是有高亮工具 TODO Highlight, 欢迎补充</p>
-            <h1 id="19-">19空格</h1>
-            <h2 id="19-1-tab-4-">19.1使用软tab(空格符号)进行缩进, 缩进4个空格</h2>
-            <pre><code>
+            </code></pre>
+        <p>ps: vscode还找不到TODO管理工具, 倒是有高亮工具 TODO Highlight, 欢迎补充</p>
+        <h1 id="19-">19空格</h1>
+        <h2 id="19-1-tab-4-">19.1使用软tab(空格符号)进行缩进, 缩进4个空格</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>{
             ∙∙<span class="hljs-keyword">let</span> name;
@@ -1411,8 +1619,10 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">baz</span>(<span class="hljs-params"></span>) </span>{
             ∙∙∙∙<span class="hljs-keyword">let</span> name;
 }
-            </code></pre><h2 id="19-2-">19.2代码块开始的位置, 即<code>{</code>前添加一个空格</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="19-2-">19.2代码块开始的位置, 即
+            <code>{</code>前添加一个空格</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span>(<span class="hljs-params"></span>)</span>{
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'test'</span>);
@@ -1434,9 +1644,13 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
   <span class="hljs-attr">age</span>: <span class="hljs-string">'1 year'</span>,
   <span class="hljs-attr">breed</span>: <span class="hljs-string">'Bernese Mountain Dog'</span>,
 });
-            </code></pre><h2 id="19-3-if-">19.3为流程控制语句的关键词(如<code>if</code>)与开括号<code>(</code>之间应添加一个空格</h2>
-            <p>但是调用函数与声明函数式, 函数名和开括号<code>(</code>之间不应该添加空格</p>
-            <pre><code>
+            </code></pre>
+        <h2 id="19-3-if-">19.3为流程控制语句的关键词(如
+            <code>if</code>)与开括号
+            <code>(</code>之间应添加一个空格</h2>
+        <p>但是调用函数与声明函数式, 函数名和开括号
+            <code>(</code>之间不应该添加空格</p>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">if</span>(isJedi) {
               fight ();
@@ -1456,34 +1670,42 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fight</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Swooosh!'</span>);
 }
-            </code></pre><h2 id="19-4-">19.4运算符号前后都要加空格</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="19-4-">19.4运算符号前后都要加空格</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">const</span> x=y+<span class="hljs-number">5</span>;
             
 <span class="hljs-comment">// good</span>
 <span class="hljs-keyword">const</span> x = y + <span class="hljs-number">5</span>;
-            </code></pre><h2 id="19-5-">19.5文件末尾需要空一行</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="19-5-">19.5文件末尾需要空一行</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">import</span> { es6 } <span class="hljs-keyword">from</span> <span class="hljs-string">'./AirbnbStyleGuide'</span>;
   <span class="hljs-comment">// ...</span>
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> es6;
-            </code></pre><pre><code>
+            </code></pre>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">import</span> { es6 } <span class="hljs-keyword">from</span> <span class="hljs-string">'./AirbnbStyleGuide'</span>;
   <span class="hljs-comment">// ...</span>
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> es6;↵
             ↵
-            </code></pre><pre><code>
+            </code></pre>
+        <pre><code>
 <span class="hljs-comment">// good</span>
 <span class="hljs-keyword">import</span> { es6 } <span class="hljs-keyword">from</span> <span class="hljs-string">'./AirbnbStyleGuide'</span>;
   <span class="hljs-comment">// ...</span>
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> es6;↵
-            </code></pre><h2 id="19-6-">19.6如果链式调用代码太长, 那么可以每一个调用后换一行, 每行以<code>.</code>开头</h2>
-            <p>注意不要保持点<code>.</code>与点<code>.</code>之间对齐, 因为容易对不齐, 而且弄起来很累, 应该根据层级进行缩进.</p>
-            <p>当然, 如果链式调用中的代码有父子关系, 也可以进行适当的缩进调整, 见最后一个例子</p>
-            <pre><code>
+            </code></pre>
+        <h2 id="19-6-">19.6如果链式调用代码太长, 那么可以每一个调用后换一行, 每行以
+            <code>.</code>开头</h2>
+        <p>注意不要保持点
+            <code>.</code>与点
+            <code>.</code>之间对齐, 因为容易对不齐, 而且弄起来很累, 应该根据层级进行缩进.</p>
+        <p>当然, 如果链式调用中的代码有父子关系, 也可以进行适当的缩进调整, 见最后一个例子</p>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
             $(<span class="hljs-string">'#items'</span>).find(<span class="hljs-string">'.selected'</span>).highlight().end().find(<span class="hljs-string">'.open'</span>).updateCount();
             
@@ -1532,8 +1754,9 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
             
 <span class="hljs-comment">// good</span>
 <span class="hljs-keyword">const</span> leds = stage.selectAll(<span class="hljs-string">'.led'</span>).data(data);
-            </code></pre><h2 id="19-7blocks-">19.7blocks和下一个语句之间应该添加空行</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="19-7blocks-">19.7blocks和下一个语句之间应该添加空行</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">if</span> (foo) {
   <span class="hljs-keyword">return</span> bar;
@@ -1586,8 +1809,9 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
             ];
             
 <span class="hljs-keyword">return</span> arr;
-            </code></pre><h2 id="19-8block-">19.8block开始处不应该空行</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="19-8block-">19.8block开始处不应该空行</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bar</span>(<span class="hljs-params"></span>) </span>{
             
@@ -1623,8 +1847,9 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 } <span class="hljs-keyword">else</span> {
   <span class="hljs-built_in">console</span>.log(foo);
 }
-            </code></pre><h2 id="19-9-">19.9括号与内容之间不必添加空格</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="19-9-">19.9括号与内容之间不必添加空格</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bar</span>(<span class="hljs-params"> foo </span>) </span>{
   <span class="hljs-keyword">return</span> foo;
@@ -1644,8 +1869,9 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 <span class="hljs-keyword">if</span> (foo) {
   <span class="hljs-built_in">console</span>.log(foo);
 }
-            </code></pre><h2 id="19-10-">19.10方括号与内容之间不必添加空格</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="19-10-">19.10方括号与内容之间不必添加空格</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
             const foo = [ <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span> ];
             console.log(foo[ <span class="hljs-number">0</span> ]);
@@ -1653,16 +1879,18 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 <span class="hljs-comment">// good</span>
             const foo = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
             console.log(foo[<span class="hljs-number">0</span>]);
-            </code></pre><h2 id="19-11-">19.11花括号与内容之间应添加空格</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="19-11-">19.11花括号与内容之间应添加空格</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">const</span> foo = {clark: <span class="hljs-string">'kent'</span>};
             
 <span class="hljs-comment">// good</span>
 <span class="hljs-keyword">const</span> foo = { clark: <span class="hljs-string">'kent'</span> };
-            </code></pre><h1 id="20-">20逗号</h1>
-            <h2 id="20-1-">20.1逗号不应该放行首</h2>
-            <pre><code>
+            </code></pre>
+        <h1 id="20-">20逗号</h1>
+        <h2 id="20-1-">20.1逗号不应该放行首</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">const</span> story = [
     <span class="hljs-keyword">once</span>
@@ -1692,8 +1920,9 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
               birthYear: <span class="hljs-number">1815</span>,
               superPower: <span class="hljs-symbol">'computers</span>',
 };
-            </code></pre><h2 id="20-2additional-trailing-comma-">20.2Additional trailing comma, 即数组, 对象的最后一个成员应添加一个逗号</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="20-2additional-trailing-comma-">20.2Additional trailing comma, 即数组, 对象的最后一个成员应添加一个逗号</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">const</span> hero = {
               firstName: <span class="hljs-string">'Dana'</span>,
@@ -1765,12 +1994,14 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
               inventorOf,
               ...heroArgs
             );
-            </code></pre><p>优点是<code>git diff</code>会更清晰, 特别是在解决冲突时.</p>
-            <h1 id="21-">21分号</h1>
-            <p>别说了, angular那群人是分号党, 我们就别搞事情了, 第一优先级是不加班, 不加班意味着不搞事.</p>
-            <h1 id="22-">22命名规范</h1>
-            <h2 id="22-1-">22.1避免单字母变量名</h2>
-            <pre><code>
+            </code></pre>
+        <p>优点是
+            <code>git diff</code>会更清晰, 特别是在解决冲突时.</p>
+        <h1 id="21-">21分号</h1>
+        <p>别说了, angular那群人是分号党, 我们就别搞事情了, 第一优先级是不加班, 不加班意味着不搞事.</p>
+        <h1 id="22-">22命名规范</h1>
+        <h2 id="22-1-">22.1避免单字母变量名</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">q</span><span class="hljs-params">()</span> </span>{
   <span class="hljs-comment">// ...</span>
@@ -1780,8 +2011,9 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">query</span><span class="hljs-params">()</span> </span>{
   <span class="hljs-comment">// ...</span>
 }
-            </code></pre><h2 id="22-2-">22.2使用驼峰命名法, 包括私有成员</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="22-2-">22.2使用驼峰命名法, 包括私有成员</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">const</span> OBJEcttsssss = {};
 <span class="hljs-keyword">const</span> this_is_my_object = {};
@@ -1790,10 +2022,12 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 <span class="hljs-comment">// good</span>
 <span class="hljs-keyword">const</span> thisIsMyObject = {};
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">thisIsMyFunction</span><span class="hljs-params">()</span> </span>{}
-            </code></pre><p>有一种情况是例外, 比如class内有getter和setter, 便会产生一个私有变量, 该私有变量前加<code>_</code>也是可以的</p>
-            <h2 id="22-3-pascal-">22.3只有给类和构造器命名时才使用Pascal命名法</h2>
-            <p>即每个单词首字母大写</p>
-            <pre><code>
+            </code></pre>
+        <p>有一种情况是例外, 比如class内有getter和setter, 便会产生一个私有变量, 该私有变量前加
+            <code>_</code>也是可以的</p>
+        <h2 id="22-3-pascal-">22.3只有给类和构造器命名时才使用Pascal命名法</h2>
+        <p>即每个单词首字母大写</p>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">user</span>(<span class="hljs-params">options</span>) </span>{
   <span class="hljs-keyword">this</span>.name = options.name;
@@ -1813,10 +2047,14 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 <span class="hljs-keyword">const</span> good = <span class="hljs-keyword">new</span> User({
   <span class="hljs-attr">name</span>: <span class="hljs-string">'yup'</span>,
 });
-            </code></pre><h2 id="22-4-_-">22.4不要在变量名前后添加<code>_</code></h2>
-            <p>ts中有private表示私有变量, 不需要再添加<code>_</code>表示私有</p>
-            <p>getter和setter情况除外</p>
-            <pre><code>
+            </code></pre>
+        <h2 id="22-4-_-">22.4不要在变量名前后添加
+            <code>_</code>
+        </h2>
+        <p>ts中有private表示私有变量, 不需要再添加
+            <code>_</code>表示私有</p>
+        <p>getter和setter情况除外</p>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">this</span>.__firstName__ = <span class="hljs-string">'Panda'</span>;
 <span class="hljs-keyword">this</span>.firstName_ = <span class="hljs-string">'Panda'</span>;
@@ -1829,9 +2067,12 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 <span class="hljs-comment">// see https://kangax.github.io/compat-table/es6/#test-WeakMap</span>
             const firstNames = new WeakMap();
             firstNames.<span class="hljs-keyword">set</span>(<span class="hljs-keyword">this</span>, <span class="hljs-string">'Panda'</span>);
-            </code></pre><h2 id="22-5-this-">22.5不要将<code>this</code>保存到一个变量中</h2>
-            <p>es6中可以使用<code>bind</code>和箭头函数函数解决</p>
-            <pre><code>
+            </code></pre>
+        <h2 id="22-5-this-">22.5不要将
+            <code>this</code>保存到一个变量中</h2>
+        <p>es6中可以使用
+            <code>bind</code>和箭头函数函数解决</p>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">const</span> self = <span class="hljs-keyword">this</span>;
@@ -1854,10 +2095,13 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
     <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>);
   };
 }
-            </code></pre><h2 id="22-6-">22.6文件名命名</h2>
-            <p>使用angular推荐的文件命名方式, 文件名由模块名, 模块类型, 文件后缀组成. 其中使用西文句号<code>.</code>分隔模块名与模块类型; 如果模块名由多个单词组成使用<code>-</code>分隔单词.</p>
-            <p>欢迎补充, 可以继续讨论</p>
-            <pre><code>组件:
+            </code></pre>
+        <h2 id="22-6-">22.6文件名命名</h2>
+        <p>使用angular推荐的文件命名方式, 文件名由模块名, 模块类型, 文件后缀组成. 其中使用西文句号
+            <code>.</code>分隔模块名与模块类型; 如果模块名由多个单词组成使用
+            <code>-</code>分隔单词.</p>
+        <p>欢迎补充, 可以继续讨论</p>
+        <pre><code>组件:
             [组件名]<span class="hljs-selector-class">.component</span><span class="hljs-selector-class">.ts</span>
             
             如ExampleComponent:
@@ -1872,8 +2116,9 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
             使用`-`分隔单词
             HiddenHeaderComponent:
             hidden-<span class="hljs-selector-tag">header</span><span class="hljs-selector-class">.component</span><span class="hljs-selector-class">.ts</span>
-            </code></pre><h2 id="22-7-">22.7如果变量名以缩略词开头, 那么缩略词要么全部小写, 要么全部大写</h2>
-            <pre><code>
+            </code></pre>
+        <h2 id="22-7-">22.7如果变量名以缩略词开头, 那么缩略词要么全部小写, 要么全部大写</h2>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">import</span> SmsContainer <span class="hljs-keyword">from</span> <span class="hljs-string">'./containers/SmsContainer'</span>;
             
@@ -1902,12 +2147,14 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 <span class="hljs-keyword">const</span> requests = [
   <span class="hljs-comment">// ...</span>
             ];
-            </code></pre><h1 id="23accessors-getter-setter-">23Accessors(即getter,setter)</h1>
-            <p>不推荐使用js提供的getter和setter, 虽然是方便, 但是setter和getter的副作用会导致代码难以理解.</p>
-            <p>比如a的getter实际上还修改了b的值, 而我们在看代码是是默认获取a的值是返回a的当前值, 而不会去考虑获取a会导致其他动作</p>
-            <p>如果说b的setter或者setter依赖a的值, 那么代码便更难理解了. 当然通常a, b不会直接依赖, 而是通过一个链条形式的依赖联结在一起.</p>
-            <p>虽然使用getter和setter让我们在写代码时很舒服, 但是后面维护的时候就未必了. 推荐使用<code>getVal(), setVal(&#39;hello&#39;)</code>这样形式的代码</p>
-            <pre><code>
+            </code></pre>
+        <h1 id="23accessors-getter-setter-">23Accessors(即getter,setter)</h1>
+        <p>不推荐使用js提供的getter和setter, 虽然是方便, 但是setter和getter的副作用会导致代码难以理解.</p>
+        <p>比如a的getter实际上还修改了b的值, 而我们在看代码是是默认获取a的值是返回a的当前值, 而不会去考虑获取a会导致其他动作</p>
+        <p>如果说b的setter或者setter依赖a的值, 那么代码便更难理解了. 当然通常a, b不会直接依赖, 而是通过一个链条形式的依赖联结在一起.</p>
+        <p>虽然使用getter和setter让我们在写代码时很舒服, 但是后面维护的时候就未必了. 推荐使用
+            <code>getVal(), setVal(&#39;hello&#39;)</code>这样形式的代码</p>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">class</span> <span class="hljs-title">Dragon</span> {
   <span class="hljs-function"><span class="hljs-keyword">get</span> <span class="hljs-title">age</span>(<span class="hljs-params"></span>) </span>{
@@ -1929,13 +2176,18 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
     <span class="hljs-comment">// ...</span>
   }
 }
-            </code></pre><p>如果你还坚持使用, 那么注意你的getter是无副作用的, 而setter尽可能副作用小.</p>
-            <p>ps: 有时候在getter写有副作用代码确实是被逼无奈, 但这时候一定要写好注释, 你干了什么事情, 为什么要这么写.</p>
-            <h1 id="24-">24标准库</h1>
-            <p>即js自带的库</p>
-            <h2 id="24-1-number-isnan-isnan-">24.1用<code>Number.isNaN</code>取代<code>isNaN</code></h2>
-            <p>因为<code>isNaN</code>会隐式将非数字转换为数字</p>
-            <pre><code>
+            </code></pre>
+        <p>如果你还坚持使用, 那么注意你的getter是无副作用的, 而setter尽可能副作用小.</p>
+        <p>ps: 有时候在getter写有副作用代码确实是被逼无奈, 但这时候一定要写好注释, 你干了什么事情, 为什么要这么写.</p>
+        <h1 id="24-">24标准库</h1>
+        <p>即js自带的库</p>
+        <h2 id="24-1-number-isnan-isnan-">24.1用
+            <code>Number.isNaN</code>取代
+            <code>isNaN</code>
+        </h2>
+        <p>因为
+            <code>isNaN</code>会隐式将非数字转换为数字</p>
+        <pre><code>
 <span class="hljs-comment">// bad</span>
 <span class="hljs-built_in">isNaN</span>(<span class="hljs-string">'1.2'</span>); <span class="hljs-comment">// false</span>
 <span class="hljs-built_in">isNaN</span>(<span class="hljs-string">'1.2.3'</span>); <span class="hljs-comment">// true</span>
@@ -1943,17 +2195,27 @@ someStack.push(<span class="hljs-string">'abracadabra'</span>);
 <span class="hljs-comment">// good</span>
 <span class="hljs-built_in">Number</span>.isNaN(<span class="hljs-string">'1.2.3'</span>); <span class="hljs-comment">// false</span>
 <span class="hljs-built_in">Number</span>.isNaN(<span class="hljs-built_in">Number</span>(<span class="hljs-string">'1.2.3'</span>)); <span class="hljs-comment">// true</span>
-            </code></pre><p>如上述例子中<code>isNaN(&#39;1.2&#39;)</code>会现将字符串1.2转换为数字1.2, 然后再判断是否为NaN</p>
-            <p>如果你需要转换, 请将转换写成显式转换<code>Number.isNaN(Number(&#39;1.2.3&#39;));</code></p>
-            <h2 id="24-2-number-isfinite-isfinite-">24.2用<code>Number.isFinite</code>取代<code>isFinite</code></h2>
-            <p>原因同上</p>
-            <p>阅读到这里的都是勇士, 如果你不记得上述规则, 也没啥关系, 只要心中默认三次:</p>
-            <p>tslint的错误我一定改!</p>
-            <p>tslint的错误我一定改!</p>
-            <p>tslint的错误我一定改!</p>
-            <p>请试着使用以下tslint配置....嗯, 只是个alpha版, 大部分规则都按本文修改了, 但是还有一些没来得及改, 欢迎各种pr.</p>
-            <p><a href="http://gitlab.jpushoa.com/zhangrl/tslint-config/tree/master">http://gitlab.jpushoa.com/zhangrl/tslint-config/tree/master</a></p>
-        </div>
-    </body>
-    <script src="./highlight.pack.js"></script>
+            </code></pre>
+        <p>如上述例子中
+            <code>isNaN(&#39;1.2&#39;)</code>会现将字符串1.2转换为数字1.2, 然后再判断是否为NaN</p>
+        <p>如果你需要转换, 请将转换写成显式转换
+            <code>Number.isNaN(Number(&#39;1.2.3&#39;));</code>
+        </p>
+        <h2 id="24-2-number-isfinite-isfinite-">24.2用
+            <code>Number.isFinite</code>取代
+            <code>isFinite</code>
+        </h2>
+        <p>原因同上</p>
+        <p>阅读到这里的都是勇士, 如果你不记得上述规则, 也没啥关系, 只要心中默认三次:</p>
+        <p>tslint的错误我一定改!</p>
+        <p>tslint的错误我一定改!</p>
+        <p>tslint的错误我一定改!</p>
+        <p>请试着使用以下tslint配置....嗯, 只是个alpha版, 大部分规则都按本文修改了, 但是还有一些没来得及改, 欢迎各种pr.</p>
+        <p>
+            <a href="http://gitlab.jpushoa.com/zhangrl/tslint-config/tree/master">http://gitlab.jpushoa.com/zhangrl/tslint-config/tree/master</a>
+        </p>
+    </div>
+</body>
+<script src="./highlight.pack.js"></script>
+
 </html>
